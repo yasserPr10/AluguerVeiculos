@@ -45,7 +45,7 @@ public class Gerente extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Registrar novos veiculos");
+        jButton2.setText("Registar novos veiculos");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
