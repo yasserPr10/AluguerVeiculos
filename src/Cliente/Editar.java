@@ -58,6 +58,7 @@ public class Editar extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         e8 = new javax.swing.JTextField();
         e7 = new javax.swing.JPasswordField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,6 +122,13 @@ public class Editar extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Senha");
 
+        jButton3.setText("Voltar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -159,8 +167,10 @@ public class Editar extends javax.swing.JFrame {
                                 .addComponent(e2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                                 .addComponent(e1, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(e8, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(70, Short.MAX_VALUE))
+                            .addComponent(e8, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                        .addComponent(jButton3)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +209,9 @@ public class Editar extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(e5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(25, 25, 25))
         );
 
@@ -215,6 +227,7 @@ public class Editar extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void e3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_e3ActionPerformed
@@ -229,14 +242,63 @@ public class Editar extends javax.swing.JFrame {
         // TODO add your handling code here:
     
         
+        String senha=e1.getText();
+        String nome=e8.getText();
+        String idade=e2.getText();
+        String cell=e3.getText();
+        String carta=e4.getText();
+        String end=e5.getText();
+        
+        
+        
+        if(senha.length()>6 || senha.length()<6){
+            JOptionPane.showMessageDialog(this,"A senha deve ter 6 digitos","Erro",JOptionPane.ERROR_MESSAGE);
+       }
+       else{
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/consesionaria","root","");
+
+            pst=con.prepareStatement("update conta set nome=?,idade=?,celular=?,endereco=?,carta=?,senha=?");
+            
+            pst.setString(1,nome);
+            pst.setString(2,idade);
+            pst.setString(3,cell);
+            pst.setString(4,end);
+            pst.setString(5,carta);
+            pst.setString(6,senha);
+            
+            pst.executeUpdate();
+            
+            JOptionPane.showMessageDialog(this, "Atualizacao realizada com sucesso");
+            
+            e1.setText(""); 
+            e2.setText(""); 
+            e3.setText(""); 
+            e4.setText(""); 
+            e5.setText(""); 
+            e6.setText(""); 
+            e7.setText(""); 
+            e8.setText(""); 
+            
+            
+            
+           
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Editar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Editar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
         
         
         
         
         
-        
-        
-        
+        } 
         
         
         
@@ -245,7 +307,7 @@ public class Editar extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        
+         
             
         
         String senha=e1.getText();
@@ -313,9 +375,17 @@ public class Editar extends javax.swing.JFrame {
             Logger.getLogger(InfoC.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+    
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        InfoC in = new InfoC();
+        in.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,6 +433,7 @@ public class Editar extends javax.swing.JFrame {
     private javax.swing.JTextField e8;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
