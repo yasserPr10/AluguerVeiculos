@@ -156,6 +156,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="l7" min="-2" pref="131" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jButton3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="192" max="32767" attributes="0"/>
                   </Group>
@@ -205,6 +206,8 @@
                           <Component id="jLabel9" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="l7" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -282,6 +285,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="l7">
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Editar"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
