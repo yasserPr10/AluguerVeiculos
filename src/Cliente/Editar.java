@@ -24,6 +24,15 @@ public class Editar extends javax.swing.JFrame {
      */
     public Editar() {
         initComponents();
+        e8.setEnabled(false);
+        e1.setEnabled(false);
+        e2.setEnabled(false);
+        e3.setEnabled(false);
+        e4.setEnabled(false);
+        e5.setEnabled(false);
+        
+        
+        
     }
 
     
@@ -335,6 +344,15 @@ public class Editar extends javax.swing.JFrame {
             
             
             if(rs.next()==true){
+                
+
+                e8.setEnabled(true);
+                e1.setEnabled(true);
+                e2.setEnabled(true);
+                e3.setEnabled(true);
+                e4.setEnabled(true);
+                e5.setEnabled(true);
+
                 
                 String s=rs.getString("senha");
                 
