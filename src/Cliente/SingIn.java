@@ -175,8 +175,10 @@ public class SingIn extends javax.swing.JFrame {
         String carta=c5.getText();
         String senha=c6.getText();
         
-        
-          
+        if(nome.isEmpty()||idade.isEmpty()||cell.isEmpty()||ende.isEmpty()||carta.isEmpty()||senha.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Complete todos os espacos");
+        }
+        else{
        if(senha.length()>6 || senha.length()<6){
             JOptionPane.showMessageDialog(this,"A senha deve ter 6 digitos","Erro",JOptionPane.ERROR_MESSAGE);
        }
@@ -230,7 +232,7 @@ public class SingIn extends javax.swing.JFrame {
         
         }
         
-        
+       }
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -240,6 +242,7 @@ public class SingIn extends javax.swing.JFrame {
         
        Login l=new Login();
        l.setVisible(true);
+      this.hide();
       this.hide();
       
        

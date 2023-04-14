@@ -194,6 +194,12 @@ public class RegVeiculos extends javax.swing.JFrame {
         String som=r5.getSelectedItem().toString();
         String disp=r6.getSelectedItem().toString();
         
+        if(regn.isEmpty()||marca.isEmpty()||modelo.isEmpty()||preco.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Complete todos os espacos");
+            
+        }
+        
+        else{
         try {
             Class.forName("com.mysql.jdbc.Driver");
                     con=DriverManager.getConnection("jdbc:mysql://localhost:3306/consesionaria","root","");
@@ -227,7 +233,7 @@ public class RegVeiculos extends javax.swing.JFrame {
         
         
         
-        
+        }
         
         
         

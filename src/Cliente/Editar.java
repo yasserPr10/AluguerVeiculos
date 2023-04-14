@@ -257,6 +257,10 @@ public class Editar extends javax.swing.JFrame {
         String cell=e3.getText();
         String carta=e4.getText();
         String end=e5.getText();
+      
+        
+         String nom=e6.getText();
+        String pin=e7.getText();
         
         
         
@@ -269,7 +273,7 @@ public class Editar extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/consesionaria","root","");
 
-            pst=con.prepareStatement("update conta set nome=?,idade=?,celular=?,endereco=?,carta=?,senha=?");
+            pst=con.prepareStatement("update conta set nome=?,idade=?,celular=?,endereco=?,carta=?,senha=? where nome=? and senha=?");
             
             pst.setString(1,nome);
             pst.setString(2,idade);
@@ -277,6 +281,8 @@ public class Editar extends javax.swing.JFrame {
             pst.setString(4,end);
             pst.setString(5,carta);
             pst.setString(6,senha);
+            pst.setString(7,nom);
+            pst.setString(8,pin);
             
             pst.executeUpdate();
             
@@ -402,6 +408,7 @@ public class Editar extends javax.swing.JFrame {
         
         InfoC in = new InfoC();
         in.setVisible(true);
+        this.hide();
         this.hide();
     }//GEN-LAST:event_jButton3ActionPerformed
 

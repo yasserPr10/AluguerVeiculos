@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Admin
@@ -238,9 +239,9 @@ public class InfoC extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(98, 98, 98)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -281,8 +282,17 @@ public class InfoC extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+        
+        
        String nom=nome.getText();
         String pin=senha.getText();
+        
+        if(nom.isEmpty()||pin.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"Complete todos os espacos");
+            
+        }
+        else{
         
         try{            
             Class.forName("com.mysql.jdbc.Driver");
@@ -325,6 +335,7 @@ public class InfoC extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(InfoC.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
          
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -337,12 +348,14 @@ public class InfoC extends javax.swing.JFrame {
         TelaPrincipal tl =new TelaPrincipal();
         tl.setVisible(true);
         this.hide();
+        this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         Editar ed=new Editar();
         ed.setVisible(true);
+        this.hide();
         this.hide();
         
     }//GEN-LAST:event_jButton3ActionPerformed
