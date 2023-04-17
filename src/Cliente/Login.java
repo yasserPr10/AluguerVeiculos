@@ -5,6 +5,7 @@
 package Cliente;
 
 import Adm.Gerente;
+import Bank.BankC;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
@@ -47,9 +48,12 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         l2 = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(102, 0, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
@@ -86,11 +90,23 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 90, -1));
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Cliente/bank-building (1).png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 60, 50));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel3.setText("Banco P1");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 70, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,6 +124,7 @@ public class Login extends javax.swing.JFrame {
         
         SingIn sg=new SingIn();
         sg.setVisible(true);
+        this.hide();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -174,6 +191,15 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_l1ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+
+        BankC bc=new BankC();
+        bc.setVisible(true);
+        this.hide();
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -212,8 +238,10 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField l1;
     private javax.swing.JPasswordField l2;
