@@ -175,7 +175,13 @@ public class Deposito extends javax.swing.JFrame {
                         pst.setString(1, valor);
                       
                          pst.executeUpdate();
+                         
+                         JOptionPane.showMessageDialog(this,"Deposito realizado com sucesso");
                     
+                         y1.setText("");
+                         y2.setText("");
+                         y3.setText("");
+                         
             }
             
             else{
