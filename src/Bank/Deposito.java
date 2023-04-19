@@ -171,8 +171,10 @@ public class Deposito extends javax.swing.JFrame {
             
             if(rs.next()==true){
          
-                 pst=con.prepareStatement("update cartao set saldo = saldo+ ?");
+                 pst=con.prepareStatement("update cartao set saldo = saldo+ ? where cartao=? and senha=?");
                         pst.setString(1, valor);
+                        pst.setString(2,cartao);
+                        pst.setString(3,senha);
                       
                          pst.executeUpdate();
                          

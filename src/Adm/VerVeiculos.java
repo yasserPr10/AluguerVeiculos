@@ -38,11 +38,7 @@ public class VerVeiculos extends javax.swing.JFrame {
     
     public void RegistroV(){
         
-        
-        
-        
-        
-           
+              
 int y;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -65,7 +61,7 @@ int y;
             
             for (int i=1;i<=y;i++){
                 
-               v1.add(rs.getString("registro"));
+               v1.add(rs.getString("id"));
                 v1.add(rs.getString("marca"));
                 v1.add(rs.getString("modelo"));
                 v1.add(rs.getString("preco"));
@@ -125,9 +121,16 @@ int y;
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tabV);

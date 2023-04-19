@@ -59,6 +59,7 @@ int y;
             
             for (int i=1;i<=y;i++){
                 
+               v1.add(rs.getString("id"));
                v1.add(rs.getString("nome"));
                 v1.add(rs.getString("idade"));
                 v1.add(rs.getString("celular"));
@@ -109,17 +110,17 @@ int y;
 
         tabC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Idade", "Celular", "Endereco", "Carta"
+                "ID", "Nome", "Idade", "Celular", "Endereco", "Carta"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {

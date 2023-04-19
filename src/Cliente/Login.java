@@ -110,9 +110,7 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 48, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -164,6 +162,11 @@ public class Login extends javax.swing.JFrame {
                 TelaPrincipal tl =new TelaPrincipal();
                 tl.setVisible(true);
                 this.hide();
+                
+               
+                
+                TelaPrincipal.yy.setText(rs.getString("nome"));
+               
                 
                }
                        
