@@ -235,7 +235,7 @@ public class Gerente extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
 
-        VerVeiculos vv=new VerVeiculos();
+        Next2 vv=new Next2();
         vv.setVisible(true);
         this.hide();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -243,9 +243,9 @@ public class Gerente extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
-        Option tl=new Option();
-        tl.setVisible(true);
-        
+        Next nx=new Next();
+        nx.setVisible(true);
+        this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
