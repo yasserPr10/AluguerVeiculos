@@ -4,6 +4,7 @@
  */
 package Adm;
 
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +14,9 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -53,7 +57,7 @@ int y;
               
               y=yr.getColumnCount();
               
-             DefaultTableModel df=(DefaultTableModel)tabV.getModel();
+             DefaultTableModel df=(DefaultTableModel)tab.getModel();
              df.setRowCount(0);
              
            while(rs.next()){
@@ -61,12 +65,20 @@ int y;
             
             for (int i=1;i<=y;i++){
                 
-               v1.add(rs.getString("id"));
+                v1.add(rs.getString("id"));
                 v1.add(rs.getString("marca"));
                 v1.add(rs.getString("modelo"));
+                v1.add(rs.getString("tipo"));
+                v1.add(rs.getString("tanque"));
+                v1.add(rs.getString("pass"));
                 v1.add(rs.getString("preco"));
-                v1.add(rs.getString("som"));
                 v1.add(rs.getString("disponivel"));
+                v1.add(rs.getString("cor"));
+                v1.add(rs.getString("ac"));
+                v1.add(rs.getString("airbag"));
+                v1.add(rs.getString("som"));
+               
+               
         }
         df.addRow(v1);
 
@@ -78,19 +90,25 @@ int y;
             Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
-    
-    
+   
 }
     
+  
+    public void mostrat2(int width,int height,byte[] image_byte, JLabel label){
+        
+//pegar a imagem
+
+ImageIcon imc=new ImageIcon(image_byte);
+
+//tamanho
+Image image= imc.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+label.setIcon(new ImageIcon(image));
+         
+    }
+         
     
-    
-    
-    
-    
-    
-    
-    
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,27 +120,29 @@ int y;
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabV = new javax.swing.JTable();
+        tab = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        ima = new javax.swing.JLabel();
+        id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabV.setModel(new javax.swing.table.DefaultTableModel(
+        tab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Registro", "Marca", "Modelo", "Preco", "Som", "Disponivel"
+                "Registro", "Marca", "Modelo", "Tipo", "Tanque", "Passageiros", "Preco", "disponivel", "Cor", "Ac", "Airbag", "Som"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -133,7 +153,14 @@ int y;
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabV);
+        tab.setInheritsPopupMenu(true);
+        tab.setRowHeight(30);
+        tab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tab);
 
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -142,20 +169,38 @@ int y;
             }
         });
 
+        id.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        id.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(754, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(405, 405, 405))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 976, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(ima, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(id)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(id)
+                        .addGap(79, 79, 79)
+                        .addComponent(ima, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(0, 15, Short.MAX_VALUE))
@@ -172,6 +217,57 @@ int y;
         ge.setVisible(true);
         this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabMouseClicked
+        // TODO add your handling code here:
+        
+            DefaultTableModel m=(DefaultTableModel )tab.getModel();
+        
+        int sel=tab.getSelectedRow();
+      
+        id.setText(m.getValueAt(sel,0).toString());
+        
+    String i=id.getText();
+        
+    
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/consesionaria","root","");
+
+         
+            pst=con.prepareStatement("select * from imagem where id=?");
+            
+           pst.setString(1,i);
+            
+             ResultSet rs=pst.executeQuery();
+            
+             
+             if(rs.next()){
+        
+                 
+              byte [] im=(rs.getBytes(3));
+                 
+         
+            
+        mostrat2(ima.getWidth(), ima.getHeight(), im, ima);
+}
+             
+             else{
+                 
+                  ima.setIcon(null);
+             }
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Marca.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Marca.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    
+    
+    
+        
+    }//GEN-LAST:event_tabMouseClicked
 
     /**
      * @param args the command line arguments
@@ -209,8 +305,10 @@ int y;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel id;
+    private javax.swing.JLabel ima;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabV;
+    private javax.swing.JTable tab;
     // End of variables declaration//GEN-END:variables
 }

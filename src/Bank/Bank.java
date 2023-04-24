@@ -117,8 +117,7 @@ public class Bank extends javax.swing.JFrame {
         Saldo s =new Saldo();
         s.setVisible(true);
         this.hide();
-        
-        
+            
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
