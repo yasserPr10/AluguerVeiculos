@@ -4,6 +4,7 @@
  */
 package Adm;
 
+import Classes.Carro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
@@ -27,12 +28,13 @@ public class RegVeiculos extends javax.swing.JFrame {
          marca();
     }
     
+    //Instacia da classe 
+    Carro cr=new Carro();
+    
        Connection con;
        PreparedStatement pst;
        ResultSet rs;
      
-        
-       
        
        public void marca(){
            
@@ -45,13 +47,13 @@ public class RegVeiculos extends javax.swing.JFrame {
     
                 rs=pst.executeQuery();
                 
-                r2.removeAllItems();
+                marca.removeAllItems();
                 
                 
                 while(rs.next()){
                     
                 
-                r2.addItem(rs.getString(2));
+                marca.addItem(rs.getString(2));
                 
         }
             
@@ -81,10 +83,10 @@ public class RegVeiculos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        r4 = new javax.swing.JTextField();
-        r3 = new javax.swing.JTextField();
+        pre = new javax.swing.JTextField();
+        modelo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        r6 = new javax.swing.JComboBox<>();
+        disp = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         air = new javax.swing.JCheckBox();
         ac = new javax.swing.JCheckBox();
@@ -94,15 +96,15 @@ public class RegVeiculos extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        r7 = new javax.swing.JComboBox<>();
+        cor = new javax.swing.JComboBox<>();
         aut = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         manual = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
-        ps = new javax.swing.JComboBox<>();
+        pas = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        ps1 = new javax.swing.JComboBox<>();
-        r2 = new javax.swing.JComboBox<>();
+        tanque = new javax.swing.JComboBox<>();
+        marca = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,19 +119,19 @@ public class RegVeiculos extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setText("Preco/dia");
 
-        r4.addActionListener(new java.awt.event.ActionListener() {
+        pre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                r4ActionPerformed(evt);
+                preActionPerformed(evt);
             }
         });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel6.setText("Disponivel");
 
-        r6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Nao" }));
-        r6.addActionListener(new java.awt.event.ActionListener() {
+        disp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Nao" }));
+        disp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                r6ActionPerformed(evt);
+                dispActionPerformed(evt);
             }
         });
 
@@ -165,6 +167,11 @@ public class RegVeiculos extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Adicionar imagem do veiculo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Limpar");
@@ -199,21 +206,21 @@ public class RegVeiculos extends javax.swing.JFrame {
                 .addComponent(air)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(s)
-                .addGap(54, 54, 54)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(58, 58, 58)
                 .addComponent(jButton1)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel7.setText("Cor");
 
-        r7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Preto", "Cizento", "Branco", "Vermelho", "Rosa", "Amarelo", "Azul", " " }));
+        cor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Preto", "Cizento", "Branco", "Vermelho", "Rosa", "Amarelo", "Azul", " " }));
 
         aut.setText("Automatico");
         aut.addActionListener(new java.awt.event.ActionListener() {
@@ -235,17 +242,17 @@ public class RegVeiculos extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setText("Tanque");
 
-        ps.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "4", "15", "+30", " " }));
+        pas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "4", "15", "+30", " " }));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setText("Passageiros");
 
-        ps1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gasolina", "Diesel" }));
+        tanque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gasolina", "Diesel" }));
 
-        r2.setMaximumRowCount(100);
-        r2.addActionListener(new java.awt.event.ActionListener() {
+        marca.setMaximumRowCount(100);
+        marca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                r2ActionPerformed(evt);
+                marcaActionPerformed(evt);
             }
         });
 
@@ -271,14 +278,14 @@ public class RegVeiculos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(aut, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(r7, javax.swing.GroupLayout.Alignment.LEADING, 0, 177, Short.MAX_VALUE)
-                        .addComponent(r6, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(r4, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ps, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ps1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cor, javax.swing.GroupLayout.Alignment.LEADING, 0, 177, Short.MAX_VALUE)
+                        .addComponent(disp, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pre, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pas, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tanque, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(r2, javax.swing.GroupLayout.Alignment.LEADING, 0, 177, Short.MAX_VALUE)
-                        .addComponent(r3, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(marca, javax.swing.GroupLayout.Alignment.LEADING, 0, 177, Short.MAX_VALUE)
+                        .addComponent(modelo, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -288,11 +295,11 @@ public class RegVeiculos extends javax.swing.JFrame {
                 .addGap(77, 77, 77)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(r2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(r3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aut)
@@ -301,23 +308,23 @@ public class RegVeiculos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(ps1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tanque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(r4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(r6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(disp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(r7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 87, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -344,13 +351,15 @@ public class RegVeiculos extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        String marca=r2.getSelectedItem().toString();
-        String modelo=r3.getText();
-        String pass=ps.getSelectedItem().toString();
-        String preco=r4.getText();
-        String disp=r6.getSelectedItem().toString();
-         String cor=r7.getSelectedItem().toString();
-         String tank=ps1.getSelectedItem().toString();
+       
+        
+        String marca1=marca.getSelectedItem().toString();
+        String modelo1=modelo.getText();
+        int pass1=Integer.valueOf(pas.getSelectedItem().toString());
+        double preco1=Double.valueOf(pre.getText());
+        String disp1=disp.getSelectedItem().toString();
+         String cor1=cor.getSelectedItem().toString();
+         String tank=tanque.getSelectedItem().toString();
         
          String tipo="Automatico";
          
@@ -370,60 +379,17 @@ public class RegVeiculos extends javax.swing.JFrame {
          
          
         
-        if(marca.isEmpty()||modelo.isEmpty()||preco.isEmpty()){
+        if(marca1.isEmpty()||modelo1.isEmpty()){
             JOptionPane.showMessageDialog(this, "Complete todos os espacos");
             
         }
         
         else{
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-                    con=DriverManager.getConnection("jdbc:mysql://localhost:3306/consesionaria","root","");
-
-           pst=con.prepareStatement("insert into regveiculos (marca,modelo,tipo,tanque,pass,preco,disponivel,cor,ac,airbag,som) values (?,?,?,?,?,?,?,?,?,?,?)");
-          
-           pst.setString(1,marca);   
-           pst.setString(2,modelo);   
-           pst.setString(3,tipo);   
-           pst.setString(4,tank);   
-           pst.setString(5,pass);   
-           pst.setString(6,preco);   
-           pst.setString(7,disp);   
-           pst.setString(8,cor);   
-           pst.setString(9,ac1);   
-           pst.setString(10,airbag);   
-           pst.setString(11,som);   
-           
-           pst.executeUpdate();
-           
-            JOptionPane.showMessageDialog(this,"Veiculo adicionado com sucesoo");
-           
             
-            r2.setSelectedIndex(0);            
-            r3.setText("");
-            r4.setText("");
-            ps.setSelectedIndex(0);
-            r6.setSelectedIndex(0);
-            r7.setSelectedIndex(0);
-            manual.setSelected(false);
-            aut.setSelected(false);
-            ac.setSelected(false);
-            air.setSelected(false);
-            s.setSelected(false);
+            cr.registrat(marca1, modelo1, tipo, tank, pass1, preco1, disp1, cor1, ac1, airbag, som);
             
-                    
-                    
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RegVeiculos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(RegVeiculos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this,"Veiculo adicionado com sucesso");
         }
-        
-        
-        
-        }
-        
-        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -447,28 +413,28 @@ public class RegVeiculos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_manualActionPerformed
 
-    private void r2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r2ActionPerformed
+    private void marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_r2ActionPerformed
+    }//GEN-LAST:event_marcaActionPerformed
 
-    private void r4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r4ActionPerformed
+    private void preActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_r4ActionPerformed
+    }//GEN-LAST:event_preActionPerformed
 
-    private void r6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r6ActionPerformed
+    private void dispActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dispActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_r6ActionPerformed
+    }//GEN-LAST:event_dispActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-        r2.setSelectedIndex(0);            
-            r3.setText("");
-            r4.setText("");
-            ps.setSelectedIndex(0);
-            r6.setSelectedIndex(0);
-            r7.setSelectedIndex(0);
+        marca.setSelectedIndex(0);            
+            modelo.setText("");
+            pre.setText("");
+            pas.setSelectedIndex(0);
+            disp.setSelectedIndex(0);
+            cor.setSelectedIndex(0);
             manual.setSelected(false);
             aut.setSelected(false);
             ac.setSelected(false);
@@ -477,6 +443,15 @@ public class RegVeiculos extends javax.swing.JFrame {
             
                     
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        ImagemV ima=new ImagemV();
+        ima.setVisible(true);
+        this.hide();
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -518,6 +493,8 @@ public class RegVeiculos extends javax.swing.JFrame {
     private javax.swing.JCheckBox ac;
     private javax.swing.JCheckBox air;
     private javax.swing.JCheckBox aut;
+    private javax.swing.JComboBox<String> cor;
+    private javax.swing.JComboBox<String> disp;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -533,13 +510,11 @@ public class RegVeiculos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JCheckBox manual;
-    private javax.swing.JComboBox<String> ps;
-    private javax.swing.JComboBox<String> ps1;
-    private javax.swing.JComboBox<String> r2;
-    private javax.swing.JTextField r3;
-    private javax.swing.JTextField r4;
-    private javax.swing.JComboBox<String> r6;
-    private javax.swing.JComboBox<String> r7;
+    private javax.swing.JComboBox<String> marca;
+    private javax.swing.JTextField modelo;
+    private javax.swing.JComboBox<String> pas;
+    private javax.swing.JTextField pre;
     private javax.swing.JCheckBox s;
+    private javax.swing.JComboBox<String> tanque;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,7 @@
  */
 package Bank;
 
+import Classes.Banco;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,10 +31,9 @@ public class Cconta extends javax.swing.JFrame {
         b8.setText("100");
     }
     
-      Connection con;
-        PreparedStatement pst;
-        ResultSet rs;
-
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,6 +101,8 @@ public class Cconta extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jButton1.setText("Criar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +116,14 @@ public class Cconta extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setText("Saldo");
 
+        b7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b7ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jButton2.setText("Sair");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,9 +165,9 @@ public class Cconta extends javax.swing.JFrame {
                                 .addComponent(b8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(304, 304, 304)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,6 +231,9 @@ public class Cconta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+   
     private void b4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b4ActionPerformed
         // TODO add your handling code here:
         
@@ -247,15 +260,22 @@ public class Cconta extends javax.swing.JFrame {
         String idade=b2.getText();
         String celular=b3.getText();
         String bilhete=b4.getText();
-        String cartao=b5.getText();
+        int cartao=Integer.valueOf(b5.getText());
         String senha=b6.getText();
         String senha2=b7.getText();
         String saldo=b8.getText();
         
               
         
-            
-              if(nome.isEmpty() ||idade.isEmpty() || celular.isEmpty() ||bilhete.isEmpty()  ||cartao.isEmpty()  ||senha.isEmpty() || senha2.isEmpty()){
+              int ida= Integer.valueOf(b2.getText());
+              int card= Integer.valueOf(b5.getText());
+              double sad=Double.valueOf(b8.getText());
+        
+              Banco bc1 =new Banco(b4.getText(),card,sad,b1.getText(),ida,b3.getText(),b6.getText(),b7.getText());
+      
+              
+ 
+              if(nome.isEmpty() ||idade.isEmpty() || celular.isEmpty() ||bilhete.isEmpty()  ||senha.isEmpty() || senha2.isEmpty()){
             
             JOptionPane.showMessageDialog(this,"Complete todos os espacos","Erro",JOptionPane.ERROR_MESSAGE);
         }
@@ -286,43 +306,9 @@ public class Cconta extends javax.swing.JFrame {
                   if(senha.equals(senha2)){    
               
                   
-              try {
-            Class.forName("com.mysql.jdbc.Driver");
-           con=DriverManager.getConnection("jdbc:mysql://localhost:3306/consesionaria","root","");
-
-            pst=con.prepareStatement("insert into cartao (nome,idade,cell,edentidade,cartao,senha,saldo) values (?,?,?,?,?,?,?)");
-
-            pst.setString(1, nome);
-            pst.setString(2, idade);
-            pst.setString(3, celular);
-            pst.setString(4, bilhete);
-            pst.setString(5, cartao);
-            pst.setString(6, senha);
-            pst.setString(7, saldo);
-            
-            pst.executeUpdate();
-            
-            JOptionPane.showMessageDialog(this, "Conta criada com sucesso");
-            
-            this.hide();
-            
-            b1.setText("");
-            b2.setText("");
-            b3.setText("");
-            b4.setText("");
-            b5.setText("");
-            b6.setText("");
-            b7.setText("");
-            b8.setText("");
-       
-              
+        bc1.bank(nome, cartao, sad, nome, idade2, celular, senha, senha2);
         
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Cconta.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Cconta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+           this.hide();
                  }
                   else{
                       JOptionPane.showMessageDialog(this, "Aa senhas nao correspondem");
@@ -348,6 +334,10 @@ public class Cconta extends javax.swing.JFrame {
         this.hide();
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void b7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b7ActionPerformed
 
     /**
      * @param args the command line arguments

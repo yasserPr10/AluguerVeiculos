@@ -5,6 +5,8 @@
 package Cliente;
 
 import Bank.Cconta;
+import Classes.Conta;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
@@ -33,6 +35,9 @@ public class SingIn extends javax.swing.JFrame {
     
     Connection con;
     PreparedStatement pst;
+    
+    
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,6 +74,21 @@ public class SingIn extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setText("Nome");
 
+        c2.setForeground(new java.awt.Color(153, 153, 153));
+        c2.setText("Digite a sua idade");
+        c2.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                c2ComponentRemoved(evt);
+            }
+        });
+        c2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                c2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                c2FocusLost(evt);
+            }
+        });
         c2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 c2MouseClicked(evt);
@@ -80,9 +100,59 @@ public class SingIn extends javax.swing.JFrame {
             }
         });
 
+        c1.setForeground(new java.awt.Color(153, 153, 153));
+        c1.setText("Digite o seu nome de usuario");
+        c1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                c1FocusGained(evt);
+            }
+        });
         c1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 c1ActionPerformed(evt);
+            }
+        });
+
+        c3.setForeground(new java.awt.Color(153, 153, 153));
+        c3.setText("Numero de Celular");
+        c3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                c3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                c3FocusLost(evt);
+            }
+        });
+
+        c5.setForeground(new java.awt.Color(153, 153, 153));
+        c5.setText("Digite o numero da sua carta");
+        c5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                c5FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                c5FocusLost(evt);
+            }
+        });
+        c5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                c5ActionPerformed(evt);
+            }
+        });
+
+        c4.setForeground(new java.awt.Color(153, 153, 153));
+        c4.setText("Digite a sau morada");
+        c4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                c4FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                c4FocusLost(evt);
+            }
+        });
+        c4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                c4ActionPerformed(evt);
             }
         });
 
@@ -149,7 +219,7 @@ public class SingIn extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(c4, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(c4)
                     .addComponent(c3, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(c2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -157,7 +227,7 @@ public class SingIn extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2))
                     .addComponent(lb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(c1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(c1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                     .addComponent(c5)
                     .addComponent(c6, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(c7, javax.swing.GroupLayout.Alignment.LEADING))
@@ -231,6 +301,9 @@ public class SingIn extends javax.swing.JFrame {
         String senha=c6.getText();
         String senha2=c7.getText();
         
+        int ida=Integer.valueOf(c2.getText());
+        
+        Conta co=new Conta(c4.getText(),c5.getText(),c1.getText(),ida,c3.getText(),c6.getText(),c7.getText());
         
             if(nome.isEmpty() ||idade.isEmpty() || cell.isEmpty() ||ende.isEmpty()  ||carta.isEmpty()  ||senha.isEmpty() || senha2.isEmpty()){
             
@@ -263,62 +336,9 @@ public class SingIn extends javax.swing.JFrame {
            if(senha.equals(senha2)){
            
             
-        try {
-            // TODO add your handling code here:
+               co.registrar(nome, idade2, cell, ende, carta, senha, senha2);
             
-           Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/consesionaria","root","");
-            
-            
-            pst=con.prepareStatement("insert into conta (nome,idade,celular,endereco,carta,senha) values (?,?,?,?,?,?)");
-           
-          
-            pst.setString(1,nome);
-            pst.setString(2,idade);
-            pst.setString(3,cell);
-            pst.setString(4,ende);
-            pst.setString(5,carta);
-           pst.setString(6,senha);
-            
-            pst.executeUpdate();
-            
-            
-             int conf=JOptionPane.showConfirmDialog(this, "Ja tem uma conta no nosso banco?","Importante",JOptionPane.YES_NO_OPTION);
-             
-             if(conf==JOptionPane.YES_OPTION){
-                 
-             
-             
-             
-             
-            JOptionPane.showMessageDialog(this, "Conta criada com sucesso");
-            
-            c1.setText("");
-            c2.setText("");
-            c3.setText("");
-            c4.setText("");
-            c5.setText("");
-            c6.setText("");
-            c7.setText("");
-            
-             }
-             else{
-                 
-                 JOptionPane.showMessageDialog(this,"Vc precisa criar uma conta para continuar");
-                 
-                 Cconta cc=new Cconta();
-                 
-                 cc.setVisible(true);
-                 
-             }
-             
-        } catch (ClassNotFoundException ex) {
-           // Logger.getLogger(SingIn.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (SQLException ex) {
-           // Logger.getLogger(SingIn.class.getName()).log(Level.SEVERE, null, ex
-           JOptionPane.showInternalInputDialog(this,"Complete todos os espacos","Erro",JOptionPane.ERROR_MESSAGE);
-        }}
+     }
            else{
                JOptionPane.showMessageDialog(this,"As senha nao correspondem ","Tente novamente",JOptionPane.ERROR_MESSAGE);
                c7.setText("");
@@ -346,6 +366,8 @@ public class SingIn extends javax.swing.JFrame {
 
     private void c6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c6ActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_c6ActionPerformed
 
     private void c7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c7ActionPerformed
@@ -421,6 +443,138 @@ public class SingIn extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_c2MouseClicked
+
+    private void c1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c1FocusGained
+        // TODO add your handling code here:
+        
+        if(c1.getText().equalsIgnoreCase("digite o seu nome de usuario")){
+            
+            c1.setText("");
+            c1.setForeground(new Color(153,153,153));
+            
+            
+        }
+            
+        
+    }//GEN-LAST:event_c1FocusGained
+
+    private void c2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c2FocusLost
+        // TODO add your handling code here:
+         
+        if(c1.getText().equals("")){
+            
+            c1.setText("digite o seu nome de usuario");
+           c1.setForeground(new Color(153,153,153));
+            
+            
+        }
+        
+    }//GEN-LAST:event_c2FocusLost
+
+    private void c2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c2FocusGained
+        // TODO add your handling code here:
+        
+        
+        if(c2.getText().equalsIgnoreCase("Digite a sua idade")){
+            
+            c2.setText("");
+            c2.setForeground(new Color(153,153,153));
+            
+            
+        }
+            
+        
+    }//GEN-LAST:event_c2FocusGained
+
+    private void c2ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_c2ComponentRemoved
+        // TODO add your handling code here:
+        
+        if(c2.getText().equals("")){
+            
+            c2.setText("Digite a sua idade");
+           c2.setForeground(new Color(153,153,153));
+            
+            
+        }
+    }//GEN-LAST:event_c2ComponentRemoved
+
+    private void c4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_c4ActionPerformed
+
+    private void c3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c3FocusGained
+        // TODO add your handling code here:
+        
+        if(c3.getText().equalsIgnoreCase("Numero de Celular")){
+            
+            c3.setText("");
+            c3.setForeground(new Color(153,153,153));
+            
+            
+        }
+         
+    }//GEN-LAST:event_c3FocusGained
+
+    private void c3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c3FocusLost
+        // TODO add your handling code here:
+        
+        
+        if(c3.getText().equals("")){
+            
+            c3.setText("Digite a sua idade");
+           c3.setForeground(new Color(153,153,153));}
+    }//GEN-LAST:event_c3FocusLost
+
+    private void c4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c4FocusGained
+        // TODO add your handling code here:
+        
+         if(c4.getText().equalsIgnoreCase("Digite a sau morada")){
+            
+            c4.setText("");
+            c4.setForeground(new Color(187,187,187));   
+        }
+         
+         
+        
+    }//GEN-LAST:event_c4FocusGained
+
+    private void c4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c4FocusLost
+        // TODO add your handling code here:
+        
+        if(c4.getText().equals("")){
+            
+            c4.setText("Digite a sau morada");
+           c4.setForeground(new Color(187,187,187));}
+    }//GEN-LAST:event_c4FocusLost
+
+    private void c5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_c5ActionPerformed
+
+    private void c5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c5FocusGained
+        // TODO add your handling code here:
+        
+        
+         if(c5.getText().equalsIgnoreCase("Digite o numero da sua carta")){
+            
+            c5.setText("");
+            c5.setForeground(new Color(187,187,187));   
+        }
+    }//GEN-LAST:event_c5FocusGained
+
+    private void c5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c5FocusLost
+        // TODO add your handling code here:
+        
+        
+        
+       
+        
+        if(c5.getText().equals("")){
+            
+         c5.setText(" Digite o numero da sua carta");
+         c5.setForeground(new Color(187,187,187));}
+                                
+    }//GEN-LAST:event_c5FocusLost
 
     /**
      * @param args the command line arguments

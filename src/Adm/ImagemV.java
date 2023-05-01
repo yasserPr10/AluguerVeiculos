@@ -4,6 +4,7 @@
  */
 package Adm;
 
+import Classes.Carro;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +36,10 @@ public class ImagemV extends javax.swing.JFrame {
     /**
      * Creates new form ImagemV
      */
+    Carro carro=new Carro();
+    
+  
+    
     public ImagemV() {
         initComponents();
         RegistroM();
@@ -43,7 +48,25 @@ public class ImagemV extends javax.swing.JFrame {
     Connection con;
      PreparedStatement pst;
     
- 
+ public void regI(int id1){
+     
+       ArrayList<Integer>lista=carro.lista(id1);
+     
+     
+     String[] columnsName={"Imagens"};
+     
+     Object[][] rows=new Object[lista.size()][columnsName.length];
+     
+     for(int i=0;i<lista.size();i++){
+         
+         rows[i][0]=lista.get(i);
+     }
+     DefaultTableModel mod=new DefaultTableModel(rows,columnsName );
+     Imagens.setModel(mod);
+     
+     
+     
+ }
      
     public void RegistroM(){
         
@@ -209,7 +232,7 @@ label.setIcon(new ImageIcon(image));
         id = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table2 = new javax.swing.JTable();
+        Imagens = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -263,7 +286,7 @@ label.setIcon(new ImageIcon(image));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
 
-        table2.setModel(new javax.swing.table.DefaultTableModel(
+        Imagens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -271,68 +294,61 @@ label.setIcon(new ImageIcon(image));
                 {null}
             },
             new String [] {
-                "ID do veiculo"
+                "Imagens"
             }
         ));
-        jScrollPane2.setViewportView(table2);
+        Imagens.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ImagensMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(Imagens);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
                         .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(229, 229, 229))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(460, 460, 460)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(im1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(58, 58, 58))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(452, 452, 452)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(66, 66, 66))))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addComponent(im1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(im1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(jButton3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
-                        .addGap(72, 72, 72))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(id, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -366,6 +382,11 @@ label.setIcon(new ImageIcon(image));
            
            im1.setIcon(null);
            
+            int pos=table.getSelectedRow();
+        int i=Integer.valueOf(table.getValueAt(pos,0).toString());
+        
+           regI(i);
+           regI(i);
             
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "");
@@ -437,20 +458,62 @@ label.setIcon(new ImageIcon(image));
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Marca.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(Marca.class.getName ()).log(Level.SEVERE, null, ex);
+        }
+        
+        int pos=table.getSelectedRow();
+        int i=Integer.valueOf(table.getValueAt(pos,0).toString());
+        
+           regI(i);
+         
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void ImagensMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImagensMouseClicked
+        // TODO add your handling code here:
+        
+   DefaultTableModel m=(DefaultTableModel )Imagens.getModel();
+        
+        int sel=Imagens.getSelectedRow();
+      
+        id.setText(m.getValueAt(sel,0).toString());
+        
+    String c=id.getText();
+        
+       
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/consesionaria","root","");
+
+         
+            pst=con.prepareStatement("select * from marca where id=?");
+            
+           pst.setString(1,c);
+            
+             ResultSet rs=pst.executeQuery();
+            
+             
+             while(rs.next()){
+        
+                 
+              byte [] im=(rs.getBytes(3));
+                 
+         
+            
+        mostrat2(im1.getWidth(), im1.getHeight(), im, im1);
+}
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Marca.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(Marca.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
-        //Segunda parte
         
-       
-        lista(id2);
         
+    }//GEN-LAST:event_ImagensMouseClicked
 
-        
       
-    }//GEN-LAST:event_tableMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -487,6 +550,7 @@ label.setIcon(new ImageIcon(image));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Imagens;
     private javax.swing.JTextField id;
     private javax.swing.JLabel im1;
     private javax.swing.JButton jButton1;
@@ -496,6 +560,5 @@ label.setIcon(new ImageIcon(image));
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable table;
-    private javax.swing.JTable table2;
     // End of variables declaration//GEN-END:variables
 }
